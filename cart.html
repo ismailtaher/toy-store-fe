@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Toy Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">Toy<span>Store</span></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="cart.html" class="cart-icon-container">
+                    <i class="ri-shopping-cart-2-fill" style="color: var(--primary-color);"></i>
+                    <span class="cart-count" id="navCartCount">0</span>
+                </a>
+                <div class="mobile-menu-btn" id="menuBtn">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <main class="container" style="min-height: 50vh;">
+        <h1 style="margin-top: 3rem;">Your Shopping Cart</h1>
+        
+        <div id="cartContainer">
+            <!-- JS will inject cart layout here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <a href="index.html" class="logo footer-logo">Toy<span>Store</span></a>
+                <p class="footer-p">Premium educational toys for the bright minds of tomorrow. Cash on delivery across Pakistan.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-p" style="line-height: 2;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p class="footer-p"><i class="ri-map-pin-line"></i> Lahore, Pakistan</p>
+                <p class="footer-p"><i class="ri-phone-line"></i> +92 300 0000000</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Toy Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCartPage();
+        });
+
+        function renderCartPage() {
+            const cartContainer = document.getElementById('cartContainer');
+            const cartItems = getCart();
+
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="empty-cart-msg">
+                        <i class="ri-shopping-cart-line" style="font-size: 4rem; color: var(--border-color); margin-bottom: 1rem; display: block;"></i>
+                        <h2>Your cart is empty</h2>
+                        <p style="margin-bottom: 2rem;">Looks like you haven't added anything to your cart yet.</p>
+                        <a href="products.html" class="btn btn-primary">Start Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let cartItemsHTML = '<div class="cart-items">';
+            let total = 0;
+
+            cartItems.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                cartItemsHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <a href="product.html?slug=${item.slug}"><h3 class="cart-item-title">${item.name}</h3></a>
+                            <div style="color: var(--text-light); margin-bottom: 0.5rem;">${formatPrice(item.price)} x ${item.quantity}</div>
+                            <div class="cart-item-price">${formatPrice(subtotal)}</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="quantity-selector" style="margin-bottom: 0;">
+                                <button class="quantity-btn" style="width: 30px; height: 30px;" onclick="updateCartItemQty('${item.slug}', -1)">-</button>
+                                <input type="text" class="quantity-input" style="width: 30px; font-size: 1rem;" value="${item.quantity}" readonly>
+                                <button class="quantity-btn" style="width: 30px; height: 30px;" onclick="updateCartItemQty('${item.slug}', 1)">+</button>
+                            </div>
+                            <button class="cart-item-remove" onclick="removeFromCart('${item.slug}')">
+                                <i class="ri-delete-bin-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            cartItemsHTML += '</div>';
+
+            const summaryHTML = `
+                <div class="cart-summary">
+                    <h3 style="margin-bottom: 1.5rem;">Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Items (${getCartItemCount()}):</span>
+                        <span>${formatPrice(total)}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery (COD):</span>
+                        <span>Rs. 300</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total:</span>
+                        <span style="color: var(--primary-color);">${formatPrice(total + 300)}</span>
+                    </div>
+                    <a href="checkout.html" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Proceed to Checkout</a>
+                    <a href="products.html" class="btn btn-outline btn-block" style="margin-top: 1rem;">Continue Shopping</a>
+                </div>
+            `;
+
+            cartContainer.innerHTML = `
+                <div class="cart-container">
+                    ${cartItemsHTML}
+                    ${summaryHTML}
+                </div>
+            `;
+        }
+
+        // Expose functions globally for the onclick handlers
+        window.updateCartItemQty = function(slug, change) {
+            let cart = getCart();
+            let item = cart.find(i => i.slug === slug);
+            if (item) {
+                let newQty = item.quantity + change;
+                if (newQty < 1) newQty = 1;
+                if (newQty > 10) newQty = 10;
+                
+                // Update in storage directly to bypass standard add logic temporarily, or just call normal addToCart
+                item.quantity = newQty;
+                saveCart(cart);
+                updateCartUI();
+                renderCartPage(); // re-render
+            }
+        };
+
+        // Override removeFromCart to also trigger re-render
+        const originalRemove = window.removeFromCart;
+        window.removeFromCart = function(slug) {
+            let cart = getCart();
+            cart = cart.filter(item => item.slug !== slug);
+            saveCart(cart);
+            updateCartUI();
+            renderCartPage();
+        };
+
+    </script>
+</body>
+</html>

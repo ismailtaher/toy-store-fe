@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - Toy Store</title>
+    <meta name="description" content="Shop all our educational toys, puzzles, and building blocks for kids in Pakistan.">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">Toy<span>Store</span></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="products.html" style="color: var(--primary-color);">Products</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="cart.html" class="cart-icon-container">
+                    <i class="ri-shopping-cart-2-line"></i>
+                    <span class="cart-count" id="navCartCount">0</span>
+                </a>
+                <div class="mobile-menu-btn" id="menuBtn">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="hero" style="padding: 3rem 1rem; margin-bottom: 2rem; border-radius: 0;">
+        <div class="container">
+            <h1 style="margin-bottom: 0;">Our Collection</h1>
+            <p style="margin-top: 1rem; max-width: 600px; margin-inline: auto;">Browse our entire range of educational and creative toys designed to spark imagination.</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <main class="container">
+        <div class="product-grid" id="productGrid" style="margin-top: 2rem;">
+            <!-- All Products will be injected here via JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <a href="index.html" class="logo footer-logo">Toy<span>Store</span></a>
+                <p class="footer-p">Premium educational toys for the bright minds of tomorrow. Cash on delivery across Pakistan.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-p" style="line-height: 2;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p class="footer-p"><i class="ri-map-pin-line"></i> Lahore, Pakistan</p>
+                <p class="footer-p"><i class="ri-phone-line"></i> +92 300 0000000</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Toy Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/923000000000" target="_blank" class="whatsapp-float">
+        <i class="ri-whatsapp-line"></i>
+    </a>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Render ALL products on products page
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('productGrid');
+            products.forEach(p => {
+                grid.innerHTML += `
+                    <div class="product-card">
+                        <a href="product.html?slug=${p.slug}" class="product-image">
+                            <span class="product-category">${p.category}</span>
+                            <img src="${p.images[0]}" alt="${p.name}">
+                        </a>
+                        <div class="product-info">
+                            <a href="product.html?slug=${p.slug}"><h3 class="product-title">${p.name}</h3></a>
+                            <div class="product-price">${formatPrice(p.price)}</div>
+                            <button class="btn btn-outline btn-block" onclick="addToCart('${p.slug}')">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

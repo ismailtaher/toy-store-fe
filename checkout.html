@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Toy Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- EmailJS script placeholder -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">Toy<span>Store</span></a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="cart.html" class="cart-icon-container">
+                    <i class="ri-shopping-cart-2-line"></i>
+                    <span class="cart-count" id="navCartCount">0</span>
+                </a>
+                <div class="mobile-menu-btn" id="menuBtn">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" id="checkoutMain" style="margin-top: 3rem;">
+        <h1 style="text-align: center; margin-bottom: 2rem;">Checkout</h1>
+
+        <div class="checkout-container">
+            <div class="checkout-form">
+                <h3 style="margin-bottom: 1.5rem;">Delivery Details</h3>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" class="form-control" required placeholder="Ali Khan">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="03XXXXXXXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="province">Province *</label>
+                        <select id="province" class="form-control" required style="cursor: pointer; appearance: auto;">
+                            <option value="" disabled selected>Select Province</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="city">City *</label>
+                        <select id="city" class="form-control" required disabled
+                            style="cursor: pointer; appearance: auto;">
+                            <option value="" disabled selected>Select City First</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="address">Full Address *</label>
+                        <textarea id="address" class="form-control" required
+                            placeholder="House No, Street, Area..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="notes">Order Notes (Optional)</label>
+                        <textarea id="notes" class="form-control"
+                            placeholder="Any specific instructions for delivery"></textarea>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2rem; margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 1rem; color: var(--dark-color);">Payment Method</h4>
+                        <label
+                            style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem; border: 2px solid var(--primary-color); border-radius: 8px; cursor: pointer; background: rgba(255, 82, 82, 0.05);">
+                            <input type="radio" name="paymentMethod" value="COD" checked required
+                                style="width: 20px; height: 20px; accent-color: var(--primary-color);">
+                            <span style="font-weight: 600; font-size: 1.1rem;">Cash on Delivery (COD)</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" style="font-size: 1.1rem; padding: 1rem;"
+                        id="submitBtn">
+                        Place Order <i class="ri-checkbox-circle-line"></i>
+                    </button>
+                    <p style="text-align: center; margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">
+                        You will pay in cash upon receiving the order.
+                    </p>
+                </form>
+            </div>
+
+            <!-- Order Summary Sidebar -->
+            <div class="cart-summary" id="checkoutSummary">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Message Container -->
+    <div id="successMessage" class="success-message">
+        <i class="ri-check-line success-icon"></i>
+        <h2>Order Received!</h2>
+        <p style="font-size: 1.2rem; color: var(--text-light); margin: 1.5rem 0;">
+            Thank you for your order! Your order ID is <strong id="orderIdDisplay"></strong>.
+        </p>
+        <p style="margin-bottom: 2rem;">
+            We will contact you shortly on WhatsApp to confirm your order details.
+        </p>
+        <a href="index.html" class="btn btn-primary">Return to Home</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <a href="index.html" class="logo footer-logo">Toy<span>Store</span></a>
+                <p class="footer-p">Premium educational toys for the bright minds of tomorrow. Cash on delivery across
+                    Pakistan.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-p" style="line-height: 2;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p class="footer-p"><i class="ri-map-pin-line"></i> Lahore, Pakistan</p>
+                <p class="footer-p"><i class="ri-phone-line"></i> +92 300 0000000</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Toy Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/923000000000" target="_blank" class="whatsapp-float">
+        <i class="ri-whatsapp-line"></i>
+    </a>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+
+</html>

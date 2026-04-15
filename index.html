@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy Store - Premium Educational Toys in Pakistan</title>
+    <meta name="description"
+        content="Shop the best educational toys, puzzles, and building blocks for kids in Pakistan. Cash on delivery available.">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">Toy<span>Store</span></a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="cart.html" class="cart-icon-container">
+                    <i class="ri-shopping-cart-2-line"></i>
+                    <span class="cart-count" id="navCartCount">0</span>
+                </a>
+                <div class="mobile-menu-btn" id="menuBtn">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Spark Joy & Imagination</h1>
+                <p>Discover our curated collection of educational toys, designed to make learning fun and engaging for
+                    your little ones.</p>
+                <a href="products.html" class="btn btn-primary">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="container">
+            <h2 class="section-title">Our Best Sellers</h2>
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be injected here via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <a href="index.html" class="logo footer-logo">Toy<span>Store</span></a>
+                <p class="footer-p">Premium educational toys for the bright minds of tomorrow. Cash on delivery across
+                    Pakistan.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-p" style="line-height: 2;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p class="footer-p"><i class="ri-map-pin-line"></i> Lahore, Pakistan</p>
+                <p class="footer-p"><i class="ri-phone-line"></i> +92 300 0000000</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Toy Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/923000000000" target="_blank" class="whatsapp-float">
+        <i class="ri-whatsapp-line"></i>
+    </a>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Render featured products on homepage
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('productGrid');
+            const featuredProducts = products.filter(p => p.featured);
+
+            featuredProducts.forEach(p => {
+                grid.innerHTML += `
+                    <div class="product-card">
+                        <a href="product.html?slug=${p.slug}" class="product-image">
+                            <span class="product-category">${p.category}</span>
+                            <img src="${p.images[0]}" alt="${p.name}">
+                        </a>
+                        <div class="product-info">
+                            <a href="product.html?slug=${p.slug}"><h3 class="product-title">${p.name}</h3></a>
+                            <div class="product-price">${formatPrice(p.price)}</div>
+                            <button class="btn btn-outline btn-block" onclick="addToCart('${p.slug}')">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Add a View All card or button at the end
+            grid.innerHTML += `
+                <div class="product-card" style="display: flex; align-items: center; justify-content: center; background-color: var(--white); box-shadow: none; border: 2px dashed var(--border-color); min-height: 300px;">
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="ri-function-line" style="font-size: 3rem; color: var(--text-light); margin-bottom: 1rem; display: block;"></i>
+                        <h3 style="margin-bottom: 1rem;">View All Toys</h3>
+                        <a href="products.html" class="btn btn-primary btn-block">Explore More</a>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+
+</html>
