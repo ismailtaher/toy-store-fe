@@ -669,19 +669,6 @@ footer {
   transform: scale(1.1);
 }
 
-/* Sticky Mobile Bottom CTA */
-.mobile-bottom-cta {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: var(--white);
-  padding: 1rem;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 90;
-}
-
 .empty-cart-msg {
   text-align: center;
   padding: 3rem;
@@ -715,6 +702,10 @@ footer {
     font-size: 2rem;
   }
 
+  .product-full-info h1 {
+    font-size: 1.6rem;
+  }
+
   .product-detail-container {
     grid-template-columns: 1fr;
     margin: 1.5rem auto;
@@ -745,19 +736,5 @@ footer {
     position: absolute;
     top: 1.5rem;
     right: 0;
-  }
-
-  .mobile-bottom-cta {
-    display: block;
-  }
-
-  body.has-cta {
-    padding-bottom: 80px;
-    /* Space for bottom CTA */
-  }
-
-  .whatsapp-float {
-    bottom: 90px;
-    /* Move up to not hide behind sticky CTA */
   }
 }

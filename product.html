@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="has-cta">
+<body class="">
 
     <!-- Header -->
     <header>
@@ -69,11 +69,6 @@
         <i class="ri-whatsapp-line"></i>
     </a>
 
-    <!-- Sticky Mobile CTA -->
-    <div class="mobile-bottom-cta">
-        <button class="btn btn-primary btn-block" id="mobileAddToCartBtn">Add to Cart</button>
-    </div>
-
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
@@ -91,7 +86,6 @@
                         <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">Back to Home</a>
                     </div>
                 `;
-                document.querySelector('.mobile-bottom-cta').style.display = 'none';
                 return;
             }
 
@@ -133,12 +127,6 @@
                     <h1>${product.name}</h1>
                     <div class="product-full-price">${formatPrice(product.price)}</div>
                     
-                    <p class="product-desc">${product.description}</p>
-                    
-                    <ul class="product-details-list">
-                        ${detailsListHTML}
-                    </ul>
-
                     <div class="quantity-selector">
                         <span style="font-weight: 500;">Quantity:</span>
                         <button class="quantity-btn" onclick="updateQty(-1)">-</button>
@@ -146,17 +134,18 @@
                         <button class="quantity-btn" onclick="updateQty(1)">+</button>
                     </div>
 
-                    <button class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.1rem; box-shadow: var(--shadow-md);" onclick="addCurrentToCart()">Add to Cart <i class="ri-shopping-cart-2-line"></i></button>
+                    <button class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.1rem; box-shadow: var(--shadow-md); margin-bottom: 2rem;" onclick="addCurrentToCart()">Add to Cart <i class="ri-shopping-cart-2-line"></i></button>
+
+                    <p class="product-desc">${product.description}</p>
+                    
+                    <ul class="product-details-list">
+                        ${detailsListHTML}
+                    </ul>
                 </div>
             `;
 
             document.getElementById('productContainer').innerHTML = html;
 
-            // Setup mobile sticky button functionality
-            const mobileBtn = document.getElementById('mobileAddToCartBtn');
-            mobileBtn.addEventListener('click', () => {
-                addCurrentToCart();
-            });
             window.addCurrentToCart = function() {
                 const qty = parseInt(document.getElementById('qtyInput').value);
                 addToCart(product.slug, qty);
