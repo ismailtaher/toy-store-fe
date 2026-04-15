@@ -46,6 +46,14 @@ a {
   color: inherit;
 }
 
+/* Prevent text highlighting on interactive elements */
+a, a *, button, button *, .mobile-menu-btn, .mobile-menu-btn *, i {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 ul {
   list-style: none;
 }
